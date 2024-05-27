@@ -1,0 +1,19 @@
+1. Socso:
+name
+ID number/ passport
+Monthly or annual income
+Current employement status
+Employer name and contact information
+Other financial assets :
+-Investments
+-Real estate
+
+
+M passport:
+age
+name
+number
+gender
+nationality
+Religion
+Contact information (Address, phone no, email)
