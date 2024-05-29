@@ -4,7 +4,7 @@ WORKDIR /work/Blue-Bricks-OCR
 
 COPY . .
 
-RUN chmod 777 -R /work/Blue-Bricks-OCR
+RUN chmod 777 -R /work/Blue-Bricks-OCR && sed -i 's/\r$//' entrypoint.sh
 
 RUN pip install gunicorn
 
