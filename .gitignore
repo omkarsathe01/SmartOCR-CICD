@@ -209,4 +209,7 @@ poetry.lock
 *.h5
 *.pth
 
+# history
+history
+
 # End of file
