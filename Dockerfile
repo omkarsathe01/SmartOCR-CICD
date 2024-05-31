@@ -4,7 +4,7 @@ WORKDIR /work/Blue-Bricks-OCR
 
 COPY . .
 
-RUN chmod 777 -R /work/Blue-Bricks-OCR && sed -i 's/\r$//' entrypoint.sh
+RUN chmod 777 -R /work/Blue-Bricks-OCR
 
 RUN pip install gunicorn
 
@@ -16,4 +16,4 @@ RUN apt update \
 
 EXPOSE 5000
 
-CMD ["sh", "entrypoint.sh"]
+CMD ["sh", "start.sh"]
