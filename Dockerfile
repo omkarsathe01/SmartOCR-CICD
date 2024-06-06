@@ -18,4 +18,4 @@ RUN apt update \
 
 EXPOSE 5000
 
-CMD ["sh", "start.sh"]
+CMD ["sh", "entrypoint.sh"]

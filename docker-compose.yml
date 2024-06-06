@@ -3,7 +3,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: mightysanjay/smart-ocr:v1
+    image: registry/smart-ocr:1.0.0
     ports:
       - "5000:5000"
     restart: always
