@@ -10,6 +10,8 @@ RUN pip install gunicorn
 
 RUN pip install --no-cache-dir -r requirement.txt
 
+RUN pip install prometheus_client
+
 RUN apt update \
   && apt -y install libgl1-mesa-glx \
   && apt -y install poppler-utils \
