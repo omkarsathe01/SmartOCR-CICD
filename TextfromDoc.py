@@ -10,30 +10,35 @@ import time
 import base64
 from io import BytesIO
 from werkzeug.datastructures import FileStorage
+from prometheus_client import Counter, Histogram, generate_latest
 
 FORMAT = '%(asctime)-15s [%(levelname)s] [%(filename)s:%(lineno)s]: %(message)s'
 logging.basicConfig(format=FORMAT, level=logging.INFO, filename="logs/bluebricksOCR.out")
 
 uploaded_folder = "Images"
-os.makedirs(uploaded_folder, exist_ok=True)
-
 app = Flask(__name__)
 app.config['JSON_SORT_KEYS'] = False
 start_time = time.time()
 logging.info(start_time)
 
+if not os.path.exists(uploaded_folder):
+    os.makedirs(uploaded_folder)
+
+# Prometheus metrics
+REQUEST_COUNT = Counter('request_count', 'App Request Count', ['endpoint'])
+REQUEST_LATENCY = Histogram('request_latency_seconds', 'Request latency', ['endpoint'])
 
 def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
-
 
 @app.route("/")
 def home():
     return "<h1>SMART OCR EXTRACTION </h1>"
 
-
 @app.route("/TextFromDoc", methods=['POST'])
+@REQUEST_LATENCY.time()
 def textfromdoc():
+    REQUEST_COUNT.labels(endpoint='TextFromDoc').inc()
     try:
         # print("hello")
         if 'bankName' in request.json:
@@ -89,3 +94,7 @@ def textfromdoc():
     elapsed_time = end_time - start_time
     logging.info(elapsed_time)
     return data
+
+@app.route("/metrics")
+def metrics():
+    return Response(generate_latest(), mimetype='text/plain')
