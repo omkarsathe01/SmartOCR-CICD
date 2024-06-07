@@ -2,6 +2,6 @@ global:
   scrape_interval: 15s
 
 scrape_configs:
-  - job_name: 'flask_app'
+  - job_name: 'blue-bricks-ocr'
     static_configs:
-      - targets: ['localhost:8000']
+      - targets: ['localhost:5000']
