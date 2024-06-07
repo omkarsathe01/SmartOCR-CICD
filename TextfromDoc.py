@@ -25,8 +25,8 @@ if not os.path.exists(uploaded_folder):
     os.makedirs(uploaded_folder)
 
 # Prometheus metrics
-REQUEST_COUNT = Counter('request_count', 'App Request Count', ['endpoint'])
-REQUEST_LATENCY = Histogram('request_latency_seconds', 'Request latency', ['endpoint'])
+REQUEST_COUNT = Counter('request_count', 'App Request Count', labelnames=['endpoint'])
+REQUEST_LATENCY = Histogram('request_latency_seconds', 'Request latency', labelnames=['endpoint'])
 
 def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
